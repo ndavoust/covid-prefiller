@@ -49,9 +49,17 @@
       </button>
       <div class="alert alert-success text-center" id="linkResultWrapper" style="display: none;">
         <h4 class="mb-3">Voici votre bouton de préremplissage&nbsp;:</h4>
+
         <a href="#" class="btn btn-success btn-lg mb-3" id="linkResult" style="cursor: move;"></a>
-        <p>Déplacez ce bouton dans votre barre de favoris.<br>
-          Puis rendez-vous sur <a href="https://media.interieur.gouv.fr/deplacement-covid-19/">la page du gouvernement</a> et cliquez sur le favoris créé.</p>
+        <p class="mb-3">
+          <strong>Sur ordinateur</strong><br>
+          Déplacez ce bouton dans votre barre de favoris.<br>
+          Puis rendez-vous sur <a href="https://media.interieur.gouv.fr/deplacement-covid-19/">la page du gouvernement</a> et cliquez sur le favori créé.
+        </p>
+        <p class="mb-3">
+          <strong>Sur mobile</strong><br>
+          (Un peu plus compliqué !) Appui long sur le bouton et « copier le lien ». Puis, ajoutez cette page en favoris et collez le lien dans l’url du favori. Puis rendez-vous sur <a href="https://media.interieur.gouv.fr/deplacement-covid-19/">la page du gouvernement</a> et écrivez les premières lettres du nom du favori (<span class="titleHelp"></span>)
+        </p>
       </div>
     </div>
 
@@ -75,9 +83,12 @@
         }
         $('#linkResultWrapper').show();
         
+        document.title = 'Préremplissage ' + $firstName.val();
+        $('.titleHelp').text(document.title);
+        
         $('#linkResult')
         .attr('href', 'javascript:var d%3Ddocument%3Bfunction i(a)%7Breturn d.getElementById(a)%7Dfunction n(a)%7Breturn d.getElementsByName(a)%5B0%5D%7Dfunction e(a)%7Bt%3D%27change%27%3Bif(window.navigator.userAgent.match(/Trident%7CMSIEs/g)!%3Dnull)%7Bx%3Dd.createEvent(%27Events%27)%3Bx.initEvent(t,1,0)%3B%7Delse%7Bx%3Dnew Event(t)%3B%7Da.dispatchEvent(x)%3B%7Dfunction v(a,v)%7Ba.value%3Dv%3Be(a)%7Dfunction c(a)%7Ba.checked%3Dtrue%3Be(a)%7Dv(i("field-firstname"),"' + $firstName.val() + '")%3Bv(i("field-lastname"),"' + $lastName.val() + '")%3Bv(i("field-birthday"),"' + $birthday.val() + '")%3Bv(i("field-lieunaissance"),"' + $birthplace.val() + '")%3Bv(i("field-address"),"' + $street.val() + '")%3Bv(i("field-town"),"' + $city.val() + '")%3Bv(i("field-zipcode"),"' + $zip.val() + '")%3Bvoid(0)%3B')
-        .html('<i class="fa fa-star-o mr-2"></i> Préremplissage ' + $firstName.val())
+        .html('<i class="fa fa-star-o mr-2"></i> ' + document.title)
         .click(function(e){
           e.preventDefault();
           alert('Faites glisser ce bouton dans votre barre de favoris.')
